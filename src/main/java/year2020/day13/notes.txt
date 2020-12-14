@@ -1,0 +1,43 @@
+7,13
+
+7, 14, 21, 28, 35, 42, 49, 56, 63, 70, *77*, 84, 91,
+98, 105, 112, 119, 126, 133, 140, 147, 154, 161, *168*
+*259*
+*350*
+
+13, 26, 39, 52, 65, *78*, 91,
+104, 117, 130, 143, 156, *169*, 182
+*260*
+*351*
+
+Differences:
+6 12 5 11 4 10 3 9 2 8 *1* 7 0
+6 12 5 11 4 10 3 9 2 8 *1*
+
+Mods (13n % 7):
+6 5 4 3 2 *1* 0
+
+Mods (7n + 1 % 13):
+8 2 9 3 10 4 11 5 12 6 *0* 7 1
+
+Repeats every 13 (or whatever you're modding by)
+Next valid number will be 13 iterations of adding 7 later (i.e. add 13 * 7 for next
+valid value)
+
+Test 2 (add another value):
+7,13,16
+
+77, 168, 259, 350, 441, 532, 623
+16
+
+Mods (t + 2) % 16:
+15 10 5 0 11
+
+t = 350, 350 + 1*7*13*16, 350 + 2*7*13*16...
+t = 350, 1806, 3262...
+
+Pseudo code:
+Iterate through all busIds
+Evaluate: timeToCheck + busIndex % busId = 0
+    If false, increment timeToCheck by the product of all prev busIds
+    If true, adjust vars accordingly, continue with iteration

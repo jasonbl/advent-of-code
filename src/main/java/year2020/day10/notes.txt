@@ -1,0 +1,89 @@
+(0), 1, 2, 3, 4, 7, 8, 9, 10, 11, 14, 17, 18, 19, 20, 23, 24, 25, 28, 31, 32, 33, 34, 35, 38, 39, 42, 45, 46, 47, 48, 49, (52)
+
+Non-required adapters:
+1, 2, 3 = 7 arrangements
+8, 9, 10 = 7 arrangements
+18, 19 = 4 arrangements
+24 = 2
+32, 33, 34 = 7
+46, 47, 48 = 7
+
+7 * 7 * 4 * 2 * 7 * 7 = 19208 arrangements
+
+(0), 1, 2, 3, (6)
+
+None
+1
+2
+12
+
+2 sequential not required = 4 arrangements
+
+(0), 1, 2, 3, 4, (7)
+
+1
+2
+3
+12
+13
+23
+123
+
+3 sequential not required = 7 arrangements
+
+(0), 1, 2, 3, 4, 5, (8)
+
+2
+3
+12
+13
+14
+23
+24
+34
+123
+124
+134
+234
+1234
+
+4 sequential not required = 13 arrangements
+
+(0), 1, 2, 3, 4, 5, 6, (9)
+
+3
+13
+14
+23
+24
+25
+34
+35
+123
+124
+125
+134
+135
+145
+234
+235
+245
+345
+1234
+1235
+1245
+1345
+2345
+12345
+
+5 sequential not required = 24 arrangements
+
+Tribonacci numbers (Fn = Fn-1 + Fn-2 + Fn-3):
+n:   0, 1, 2, 3,  4,  5
+Fn:  1, 2, 4, 7, 13, 24
+
+Pseudo code:
+Iterate through adapters
+Count number of sequential non-required adapters
+Compute Tribonacci number for that number
+Multiply arrangements by that value
