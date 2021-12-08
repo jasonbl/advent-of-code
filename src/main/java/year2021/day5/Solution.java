@@ -18,7 +18,7 @@ public class Solution {
     System.out.println("Answer: " + solve(inputs));
   }
 
-  private static int solve(String[] inputs) {
+  private static long solve(String[] inputs) {
     Map<Point, Integer> pointCounts = new HashMap<>();
     for (String input : inputs) {
       Matcher matcher = REGEX.matcher(input);
@@ -36,14 +36,10 @@ public class Solution {
 //      }
     }
 
-    int overlappingPoints = 0;
-    for (Map.Entry<Point, Integer> entry : pointCounts.entrySet()) {
-      if (entry.getValue() > 1) {
-        overlappingPoints++;
-      }
-    }
-
-    return overlappingPoints;
+    return pointCounts.entrySet()
+        .stream()
+        .filter((entry) -> entry.getValue() > 1)
+        .count();
   }
 
   private static Set<Point> getPointsOnLine(Point p1, Point p2) {
