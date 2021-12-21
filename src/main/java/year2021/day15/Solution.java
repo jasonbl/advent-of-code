@@ -14,11 +14,9 @@ public class Solution {
   private static int computeShortestPath(Node[][] graph) {
     graph[0][0].setDistanceTo(0);
 
-    PriorityQueue<Node> toVisit = new PriorityQueue<>();
     Set<Node> visited = new HashSet<>();
-    for (Node[] row : graph) {
-      toVisit.addAll(Arrays.asList(row));
-    }
+    PriorityQueue<Node> toVisit = new PriorityQueue<>();
+    toVisit.add(graph[0][0]);
 
     while (!toVisit.isEmpty()) {
       Node node = toVisit.poll();
