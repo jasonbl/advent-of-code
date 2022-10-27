@@ -1,0 +1,355 @@
+// INPUT 0
+//    inp w
+w[0] = loadInt(modelNumber, 0);
+//    mul x 0 - noop
+//    add x z - noop
+//    mod x 26 - noop
+//    div z 1 - noop
+//    add x 13
+x = 13;
+//    eql x w - x set back to 0 (w can't be two digits)
+x = 0;
+//    eql x 0
+x = 1;
+//    mul y 0 - noop
+//    add y 25
+y = 25;
+//    mul y x - noop
+//    add y 1
+y = 26;
+//    mul z y - noop
+//    mul y 0
+y = 0;
+//    add y w
+y = w[0];
+//    add y 6
+y = w[0] + 6;
+//    mul y x - noop (x = 1)
+//    add z y
+z = w[0] + 6;
+
+// INPUT 1
+//    inp w
+w[1] = loadInt(modelNumber, 1);
+//    mul x 0
+x = 0;
+//    add x z
+x = w[0] + 6;
+//    mod x 26
+x = (w[0] + 6) % 26;
+//    div z 1 - noop
+//    add x 15
+x = (w[0] + 6) % 26 + 15;
+//    eql x w (w can't be two digits)
+x = 0;
+//    eql x 0
+x = 1;
+//    mul y 0
+y = 0;
+//    add y 25
+y = 25;
+//    mul y x - noop
+//    add y 1
+y = 26;
+//    mul z y
+z = 26 * (w[0] + 6);
+//    mul y 0
+y = 0;
+//    add y w
+y = w[1];
+//    add y 7
+y = w[1] + 7;
+//    mul y x - noop
+//    add z y
+z = 26 * (w[0] + 6) + w[1] + 7;
+
+// INPUT 2
+//    inp w
+w[2] = loadInt(modelNumber, 2);
+//    mul x 0
+x = 0;
+//    add x z
+x = 26 * (w[0] + 6) + w[1] + 7;
+//    mod x 26
+x = w[1] + 7;
+//    div z 1 - noop
+//    add x 15
+x = w[1] + 22;
+//    eql x w
+x = 0;
+//    eql x 0
+x = 1;
+//    mul y 0
+y = 0;
+//    add y 25
+y = 25;
+//    mul y x - noop
+//    add y 1
+y = 26;
+//    mul z y
+z = 26 * (26 * (w[0] + 6) + w[1] + 7);
+//    mul y 0
+y = 0;
+//    add y w
+y = w[2];
+//    add y 10
+y = w[2] + 10;
+//    mul y x - noop
+//    add z y
+z = 26 * (26 * (w[0] + 6) + w[1] + 7) + w[2] + 10;
+
+// INPUT 3
+//    inp w
+w[3] = loadInt(modelNumber, 3);
+//    mul x 0
+x = 0;
+//    add x z
+x = 26 * (26 * (w[0] + 6) + w[1] + 7) + w[2] + 10;
+//    mod x 26
+x = w[2] + 10;
+//    div z 1 - noop
+//    add x 11
+x = w[2] + 21;
+//    eql x w
+x = 0;
+//    eql x 0
+x = 1;
+//    mul y 0
+y = 0;
+//    add y 25
+y = 25;
+//    mul y x
+y = 25;
+//    add y 1
+y = 26;
+//    mul z y
+z = 26 * (26 * (26 * (w[0] + 6) + w[1] + 7) + w[2] + 10);
+//    mul y 0
+y = 0;
+//    add y w
+y = w[3];
+//    add y 2
+y = w[3] + 2;
+//    mul y x - noop
+//    add z y
+z = 26 * (26 * (26 * (w[0] + 6) + w[1] + 7) + w[2] + 10) + w[3] + 2;
+
+// INPUT 4
+//    inp w
+w[4] = loadInt(modelNumber, 4);
+//    mul x 0
+//    add x z
+//    mod x 26
+x = w[3] + 2;
+//    div z 26
+z = 26 * (26 * (w[0] + 6) + w[1] + 7) + w[2] + 10;
+//    add x -7
+x = w[3] - 5;
+//    eql x w
+x = w[3] - 5 == w[4] ? 1 : 0;
+//    eql x 0
+x = w[3] - 5 != w[4] ? 1 : 0;
+//    mul y 0
+y = 0;
+//    add y 25
+y = 25;
+//    mul y x
+y = w[3] - 5 == w[4] ? 0 : 25;
+//    add y 1
+y = w[3] - 5 == w[4] ? 1 : 26; // Need to avoid these multiplies by 26, otherwise z = 0 isn't possible
+//    mul z y
+z = w[3] - 5 == w[4]
+    ? 26 * (26 * (w[0] + 6) + w[1] + 7) + w[2] + 10
+    : 26 * (26 * (26 * (w[0] + 6) + w[1] + 7) + w[2] + 10);
+//    mul y 0
+y = 0;
+//    add y w
+y = w[4];
+//    add y 15
+y = w[4] + 15;
+//    mul y x
+y = w[3] - 5 == w[4] ? 0 : w[4] + 15;
+//    add z y
+z = w[3] - 5 == w[4]
+    ? 26 * (26 * (w[0] + 6) + w[1] + 7) + w[2] + 10
+    : 26 * (26 * (26 * (w[0] + 6) + w[1] + 7) + w[2] + 10) + w[4] + 15;
+
+// INPUT 5
+//    inp w
+//    mul x 0
+//    add x z
+//    mod x 26
+//    div z 1
+//    add x 10
+//    eql x w
+//    eql x 0
+//    mul y 0
+//    add y 25
+//    mul y x
+//    add y 1
+//    mul z y
+//    mul y 0
+//    add y w
+//    add y 8
+//    mul y x
+//    add z y
+
+
+//    inp w
+//    mul x 0
+//    add x z
+//    mod x 26
+//    div z 1
+//    add x 10
+//    eql x w
+//    eql x 0
+//    mul y 0
+//    add y 25
+//    mul y x
+//    add y 1
+//    mul z y
+//    mul y 0
+//    add y w
+//    add y 1
+//    mul y x
+//    add z y
+
+
+//    inp w
+//    mul x 0
+//    add x z
+//    mod x 26
+//    div z 26
+//    add x -5
+//    eql x w
+//    eql x 0
+//    mul y 0
+//    add y 25
+//    mul y x
+//    add y 1
+//    mul z y
+//    mul y 0
+//    add y w
+//    add y 10
+//    mul y x
+//    add z y
+
+
+//    inp w
+//    mul x 0
+//    add x z
+//    mod x 26
+//    div z 1
+//    add x 15
+//    eql x w
+//    eql x 0
+//    mul y 0
+//    add y 25
+//    mul y x
+//    add y 1
+//    mul z y
+//    mul y 0
+//    add y w
+//    add y 5
+//    mul y x
+//    add z y
+
+
+//    inp w
+//    mul x 0
+//    add x z
+//    mod x 26
+//    div z 26
+//    add x -3
+//    eql x w
+//    eql x 0
+//    mul y 0
+//    add y 25
+//    mul y x
+//    add y 1
+//    mul z y
+//    mul y 0
+//    add y w
+//    add y 3
+//    mul y x
+//    add z y
+
+
+//    inp w
+//    mul x 0
+//    add x z
+//    mod x 26
+//    div z 26
+//    add x 0
+//    eql x w
+//    eql x 0
+//    mul y 0
+//    add y 25
+//    mul y x
+//    add y 1
+//    mul z y
+//    mul y 0
+//    add y w
+//    add y 5
+//    mul y x
+//    add z y
+
+
+//    inp w
+//    mul x 0
+//    add x z
+//    mod x 26
+//    div z 26
+//    add x -5
+//    eql x w
+//    eql x 0
+//    mul y 0
+//    add y 25
+//    mul y x
+//    add y 1
+//    mul z y
+//    mul y 0
+//    add y w
+//    add y 11
+//    mul y x
+//    add z y
+
+
+//    inp w
+//    mul x 0
+//    add x z
+//    mod x 26
+//    div z 26
+//    add x -9
+//    eql x w
+//    eql x 0
+//    mul y 0
+//    add y 25
+//    mul y x
+//    add y 1
+//    mul z y
+//    mul y 0
+//    add y w
+//    add y 12
+//    mul y x
+//    add z y
+
+
+//    inp w
+//    mul x 0
+//    add x z
+//    mod x 26
+//    div z 26
+//    add x 0
+//    eql x w
+//    eql x 0
+//    mul y 0
+//    add y 25
+//    mul y x
+//    add y 1
+//    mul z y
+//    mul y 0
+//    add y w
+//    add y 10
+//    mul y x
+//    add z y
