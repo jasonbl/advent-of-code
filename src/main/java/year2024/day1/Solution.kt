@@ -18,7 +18,7 @@ fun main() {
   println("Part 2: " + partTwo(leftList, rightList))
 }
 
-fun partOne(leftList: Array<Int>, rightList: Array<Int>): Int {
+private fun partOne(leftList: Array<Int>, rightList: Array<Int>): Int {
   leftList.sort()
   rightList.sort()
 
@@ -30,7 +30,7 @@ fun partOne(leftList: Array<Int>, rightList: Array<Int>): Int {
   return diff
 }
 
-fun partTwo(list1: Array<Int>, list2: Array<Int>): Int {
+private fun partTwo(list1: Array<Int>, list2: Array<Int>): Int {
   val counts = HashMap<Int, Int>()
   list2.forEach {
     val currCount = counts.getOrDefault(it, 0)
