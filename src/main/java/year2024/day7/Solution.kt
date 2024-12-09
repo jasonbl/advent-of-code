@@ -17,7 +17,7 @@ fun main() {
     .sumOf { it.key }
 
   println("Part 1: $part1")
-  println("Part 1: $part2")
+  println("Part 2: $part2")
 }
 
 private fun isValid(target: Long, values: List<Long>, includeOr: Boolean): Boolean {
