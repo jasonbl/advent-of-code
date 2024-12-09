@@ -10,11 +10,8 @@ fun main() {
       parts[0].toLong() to parts[1].split(" ").map { value -> value.toLong() }
     }
 
-  val part1 = equations.filter { isValid(it.key, it.value, false) }.entries
-    .sumOf { it.key }
-
-  val part2 = equations.filter { isValid(it.key, it.value, true) }.entries
-    .sumOf { it.key }
+  val part1 = equations.filter { isValid(it.key, it.value, false) }.keys.sum()
+  val part2 = equations.filter { isValid(it.key, it.value, true) }.keys.sum()
 
   println("Part 1: $part1")
   println("Part 2: $part2")
