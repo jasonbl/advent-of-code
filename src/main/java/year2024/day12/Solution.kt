@@ -1,6 +1,7 @@
 package year2024.day12
 
 import util.InputLoader
+import year2024.shared.Position
 
 fun main() {
   val grid = InputLoader.load("/year2024/day12/input.txt")
@@ -50,13 +51,6 @@ private fun fillRegion(type: Char, pos: Position, grid: List<CharArray>, region:
 
 private fun isInGrid(position: Position, grid: List<CharArray>): Boolean {
   return position.y in grid.indices && position.x in grid[position.y].indices
-}
-
-private data class Position(val x: Int, val y: Int) {
-  fun up(): Position { return Position(x, y - 1) }
-  fun down(): Position { return Position(x, y + 1) }
-  fun left(): Position { return Position(x - 1, y) }
-  fun right(): Position { return Position(x + 1, y ) }
 }
 
 private data class Region(val type: Char, val positions: Set<Position>) {

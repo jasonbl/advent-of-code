@@ -2,6 +2,7 @@ package year2024.day8
 
 import com.google.common.math.IntMath.gcd
 import util.InputLoader
+import year2024.shared.Position
 import kotlin.math.abs
 
 fun main() {
@@ -87,5 +88,3 @@ private fun computeAntiNodesPartTwo(antennaPositions: List<Position>, grid: List
 private fun isInGrid(position: Position, grid: List<CharArray>): Boolean {
   return position.y in grid.indices && position.x in grid[position.y].indices
 }
-
-private data class Position(val x: Int, val y: Int)

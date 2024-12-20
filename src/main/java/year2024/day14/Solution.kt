@@ -1,6 +1,7 @@
 package year2024.day14
 
 import util.InputLoader
+import year2024.shared.Position
 
 private val coordinateRegex = Regex("(-?\\d+),(-?\\d+)")
 
@@ -101,10 +102,3 @@ private class Room(private var robots: List<Robot>, val width: Int, val height: 
 }
 
 private data class Robot(val x: Int, val y: Int, val vx: Int, val vy: Int)
-
-private data class Position(val x: Int, val y: Int) {
-  fun up(): Position { return Position(x, y - 1) }
-  fun down(): Position { return Position(x, y + 1) }
-  fun left(): Position { return Position(x - 1, y) }
-  fun right(): Position { return Position(x + 1, y) }
-}

@@ -1,6 +1,7 @@
 package year2024.day10
 
 import util.InputLoader
+import year2024.shared.Position
 
 fun main() {
   val grid = InputLoader.load("/year2024/day10/input.txt")
@@ -60,5 +61,3 @@ private fun findTrails(x: Int, y: Int, height: Int, grid: List<List<Int>>): List
 private fun isInGrid(x: Int, y: Int, grid: List<List<Int>>): Boolean {
   return y in grid.indices && x in grid[y].indices
 }
-
-data class Position(val x: Int, val y: Int)

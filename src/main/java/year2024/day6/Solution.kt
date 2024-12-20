@@ -1,7 +1,9 @@
 package year2024.day6
 
 import util.InputLoader
-import year2024.day6.Direction.*
+import year2024.shared.Direction
+import year2024.shared.Direction.*
+import year2024.shared.Position
 
 private val directions = listOf(UP, RIGHT, DOWN, LEFT)
 private val directionToCharMap = Direction.values()
@@ -25,13 +27,12 @@ fun main() {
   }
 
   val visited = HashMap<Position, HashSet<Direction>>()
-  var directionIndex = 0
+  var direction = UP
   var obstructions = 0
   while (true) {
     // For debugging purposes only
     printGrid(grid)
 
-    val direction = directions[directionIndex]
     visited.computeIfAbsent(Position(x, y)) { HashSet() }
       .add(direction)
 
@@ -42,14 +43,14 @@ fun main() {
     }
 
     if (grid[nextY][nextX] == '#') {
-      directionIndex = nextDirectionIndex(directionIndex)
+      direction = direction.clockwise()
     } else {
       // For debugging purposes only
       grid[y][x] = directionToCharMap[direction]!!
 
       if (!visited.contains(Position(nextX, nextY))) {
         grid[nextY][nextX] = '#'
-        if (hasLoop(x, y, nextDirectionIndex(directionIndex), visited, grid)) {
+        if (hasLoop(x, y, direction.clockwise(), visited, grid)) {
           obstructions++
         }
         grid[nextY][nextX] = '.'
@@ -67,7 +68,7 @@ fun main() {
 private fun hasLoop(
   initX: Int,
   initY: Int,
-  initDirectionIndex: Int,
+  initDirection: Direction,
   initVisited: Map<Position, HashSet<Direction>>,
   grid: List<CharArray>
 ): Boolean {
@@ -75,10 +76,9 @@ private fun hasLoop(
 
   var x = initX
   var y = initY
-  var directionIndex = initDirectionIndex
+  var direction = initDirection
   while (true) {
     val currPosition = Position(x, y)
-    val direction = directions[directionIndex]
     if (visited.contains(currPosition) && visited[currPosition]!!.contains(direction)) {
       return true
     }
@@ -93,7 +93,7 @@ private fun hasLoop(
     }
 
     if (grid[nextY][nextX] == '#') {
-      directionIndex = nextDirectionIndex(directionIndex)
+      direction = direction.clockwise()
     } else {
       x = nextX
       y = nextY
@@ -113,12 +113,3 @@ private fun printGrid(grid: List<CharArray>) {
 private fun nextDirectionIndex(directionIndex: Int): Int {
   return (directionIndex + 1) % directions.size
 }
-
-private enum class Direction(val dx: Int, val dy: Int, val char: Char) {
-  UP(0, -1, '^'),
-  RIGHT(1, 0, '>'),
-  DOWN(0, 1, 'v'),
-  LEFT(-1, 0, '<')
-}
-
-private data class Position(val x: Int, val y: Int)
