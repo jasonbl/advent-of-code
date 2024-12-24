@@ -2,6 +2,7 @@ package year2024.day20
 
 import util.InputLoader
 import year2024.shared.Position
+import java.util.PriorityQueue
 
 fun main() {
   val grid = InputLoader.load("/year2024/day20/input.txt")
@@ -60,21 +61,27 @@ private fun traverse(graph: Graph): TraversalSummary {
   // Map from position to the position before it in the shortest path
   val pathTo = hashMapOf<Position, Position?>(graph.start to null)
 
-  val unvisited = HashSet(graph.nodes)
-  while (unvisited.isNotEmpty()) {
-    // TODO This could be made more performant with a PriorityQueue
-    val position = unvisited.minBy { distanceTo[it]!! }
+  val visited = HashSet<Position>()
+  val queue = PriorityQueue(ShortestPathComparator(distanceTo))
+  queue.addAll(graph.nodes)
 
-    val unvisitedNeighbors = position.neighbors().filter { unvisited.contains(it) }
+  while (queue.isNotEmpty()) {
+    val position = queue.remove()
+
+    val unvisitedNeighbors = position.neighbors().filter { graph.nodes.contains(it) && !visited.contains(it) }
     for (neighbor in unvisitedNeighbors) {
       val distanceToNeighbor = distanceTo[position]!! + 1
       if (distanceToNeighbor < distanceTo[neighbor]!!) {
         distanceTo[neighbor] = distanceToNeighbor
         pathTo[neighbor] = position
+
+        // Recalculate neighbor's position in the queue
+        queue.remove(neighbor)
+        queue.add(neighbor)
       }
     }
 
-    unvisited.remove(position)
+    visited.add(position)
   }
 
   val shortestPath = ArrayDeque<Position>()
@@ -110,5 +117,11 @@ private fun initGraph(grid: List<CharArray>): Graph {
 }
 
 private data class Graph(val start: Position, val end: Position, val nodes: Set<Position>)
+
+private data class ShortestPathComparator(val distanceTo: Map<Position, Int>) : Comparator<Position> {
+  override fun compare(p1: Position, p2: Position): Int {
+    return distanceTo[p1]!!.compareTo(distanceTo[p2]!!)
+  }
+}
 
 private data class TraversalSummary(val shortestPath: List<Position>, val distanceTo: Map<Position, Int>)
