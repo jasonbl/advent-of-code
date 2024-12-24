@@ -1,5 +1,7 @@
 package year2024.shared
 
+import kotlin.math.abs
+
 data class Position(val x: Int, val y: Int) {
   fun up(): Position {
     return Position(x, y - 1)
@@ -28,5 +30,9 @@ data class Position(val x: Int, val y: Int) {
       Direction.LEFT -> left()
       Direction.RIGHT -> right()
     }
+  }
+
+  fun manhattanDistanceTo(position: Position): Int {
+    return abs(position.x - this.x) + abs(position.y - this.y)
   }
 }
