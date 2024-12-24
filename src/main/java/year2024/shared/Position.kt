@@ -17,6 +17,10 @@ data class Position(val x: Int, val y: Int) {
     return Position(x + 1, y)
   }
 
+  fun neighbors(): List<Position> {
+    return listOf(up(), down(), left(), right())
+  }
+
   fun neighborIn(direction: Direction): Position {
     return when (direction) {
       Direction.UP -> up()
