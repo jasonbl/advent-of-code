@@ -8,8 +8,8 @@ fun main() {
     .split(",")
     .map { it.split("-").map { it.toLong() } }
 
-  println(input.sumOf { countInvalid(it[0], it[1], ::isInvalidPartOne) })
-  println(input.sumOf { countInvalid(it[0], it[1], ::isInvalidPartTwo) })
+  println("Part 1: " + input.sumOf { countInvalid(it[0], it[1], ::isInvalidPartOne) })
+  println("Part 2: " + input.sumOf { countInvalid(it[0], it[1], ::isInvalidPartTwo) })
 }
 
 private fun countInvalid(min: Long, max: Long, isInvalid: (Long) -> Boolean): Long {
