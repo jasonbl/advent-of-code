@@ -5,7 +5,7 @@ import util.InputLoader;
 public class Part2 {
 
   public static void main(String[] args) {
-    String[] inputs = InputLoader.load("/year2019/day1/Input.txt")
+    String[] inputs = InputLoader.load("/year2019/day1/input.txt")
         .split("\n");
 
     int solution = 0;

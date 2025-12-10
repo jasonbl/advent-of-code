@@ -8,7 +8,7 @@ import java.util.Map;
 public class Part2 {
 
   public static void main(String[] args) {
-    String[] inputs = InputLoader.load("/year2019/day3/Input.txt")
+    String[] inputs = InputLoader.load("/year2019/day3/input.txt")
         .split("\n");
 
     String[] wireOne = inputs[0].split(",");
